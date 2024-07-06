@@ -25,8 +25,8 @@ public class BarberShopsScraper {
         boolean hasMoreResults = true;
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(OUTPUT_FILE));
-             Workbook workbook = new XSSFWorkbook()) { // Create Excel workbook
-            Sheet sheet = workbook.createSheet("Barber Shops"); // Create Excel sheet
+             Workbook workbook = new XSSFWorkbook()) {
+            Sheet sheet = workbook.createSheet("Barber Shops");
 
             while (hasMoreResults) {
                 String encodedQuery = URLEncoder.encode(QUERY, "UTF-8");
@@ -71,13 +71,13 @@ public class BarberShopsScraper {
                             }
                         }
 
-                        // Write to text file
+
                         writer.write("Название: " + name + "\n");
                         writer.write("Адрес: " + address + "\n");
                         writer.write("Телефон: " + phone + "\n");
                         writer.write("------------------------------------\n");
 
-                        // Write to Excel file
+
                         Row row = sheet.createRow(offset + i);
                         row.createCell(0).setCellValue(name);
                         row.createCell(1).setCellValue(address);
@@ -91,7 +91,7 @@ public class BarberShopsScraper {
                 }
             }
 
-            // Save Excel file
+
             try (FileOutputStream fos = new FileOutputStream(EXCEL_FILE)) {
                 workbook.write(fos);
             }
